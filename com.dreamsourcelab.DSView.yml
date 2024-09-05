@@ -26,8 +26,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/DreamSourceLab/DSView.git
-        tag: v1.3.0
-        commit: 02152f1c75f316b35558b494dbf22f9fb12a92bb
+        tag: v1.3.2
+        commit: 03131dd261f08f84262c0172fd051b16cc3bb586
       - type: patch
         path: patches/fix_cmake_install_prefix.patch
       - type: file
