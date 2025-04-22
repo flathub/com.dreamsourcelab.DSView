@@ -1,6 +1,6 @@
 app-id: com.dreamsourcelab.DSView
 runtime: org.kde.Platform
-runtime-version: 5.15-23.08
+runtime-version: 5.15-24.08
 sdk: org.kde.Sdk
 command: DSView
 finish-args:
@@ -39,7 +39,7 @@ modules:
       - name: boost
         sources:
           - type: archive
-            url: https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_1_83_0.tar.gz
+            url: https://archives.boost.io/release/1.83.0/source/boost_1_83_0.tar.gz
             sha256: c0685b68dd44cc46574cce86c4e17c0f611b15e195be9848dfd0769a0a207628
         buildsystem: simple
         build-commands:
