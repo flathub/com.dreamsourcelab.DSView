@@ -3,7 +3,7 @@
   <id>com.dreamsourcelab.DSView</id>
 
   <name>DSView</name>
-  <summary>An open source multi-function instrument for everyone </summary>
+  <summary>An open source multi-function instrument for everyone</summary>
 
   <developer id="com.dreamsourcelab">
     <name>DreamSourceLab</name>
@@ -24,7 +24,7 @@
       The sigrok project aims at creating a portable, cross-platform, Free/Libre/Open-Source signal analysis software suite that supports various device types (such as logic analyzers, oscilloscopes, multimeters, and more).
     </p>
     <p>
-      Adding following line to /etc/udev/rules.d/60-dreamsourcelab.rules
+      It is necessary to add the following line to the /etc/udev/rules.d/60-dreamsourcelab.rules file:
     </p>
     <p>
       SUBSYSTEM=="usb", ATTRS{idVendor}=="2a0e", MODE="0666"
