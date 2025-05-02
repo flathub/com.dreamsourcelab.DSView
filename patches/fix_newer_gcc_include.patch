@@ -1,0 +1,37 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d12bd0db..40dcb514 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -577,6 +577,8 @@ endif()
+ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+ set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
+ 
++add_compile_definitions(_DEFAULT_SOURCE)
++
+ 
+ include_directories(
+ 	${CMAKE_CURRENT_BINARY_DIR}
+diff --git a/libsigrok4DSL/input/in_wav.c b/libsigrok4DSL/input/in_wav.c
+index de16e513..7a130496 100644
+--- a/libsigrok4DSL/input/in_wav.c
++++ b/libsigrok4DSL/input/in_wav.c
+@@ -24,6 +24,7 @@
+ #include <unistd.h>
+ #include <fcntl.h>
+ #include <string.h>
++#include <strings.h>
+ #include "../log.h"
+ #include <stdlib.h>
+ 
+diff --git a/libsigrok4DSL/strutil.c b/libsigrok4DSL/strutil.c
+index 52cb01d8..6c02c6df 100644
+--- a/libsigrok4DSL/strutil.c
++++ b/libsigrok4DSL/strutil.c
+@@ -21,6 +21,7 @@
+ #include "libsigrok-internal.h"
+ #include <stdlib.h>
+ #include <string.h>
++#include <strings.h>
+ #include <stdio.h>
+ #include "log.h"
+ 

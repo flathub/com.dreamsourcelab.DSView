@@ -32,6 +32,9 @@ modules:
         path: patches/fix_cmake_install_prefix.patch
       - type: file
         path: com.dreamsourcelab.DSView.metainfo.xml
+      # It is already fixed in master but current latest release (v1.3.2) is not.
+      - type: patch
+        path: patches/fix_newer_gcc_include.patch
     build-commands:
       - install -Dm644 com.dreamsourcelab.DSView.metainfo.xml -t "${FLATPAK_DEST}/share/metainfo"
     modules:
