@@ -1,8 +1,10 @@
 app-id: com.dreamsourcelab.DSView
 runtime: org.kde.Platform
-runtime-version: 5.15-24.08
+runtime-version: 5.15-25.08
 sdk: org.kde.Sdk
 command: DSView
+rename-icon: dsview
+rename-desktop-file: dsview.desktop
 finish-args:
   - --socket=fallback-x11
   - --socket=wayland
@@ -11,18 +13,30 @@ finish-args:
 cleanup:
   - /include
   - /lib/cmake
-  - /lib/pkgconfig
   - '*.a'
-  - '*.la'
-  - /man
-  - /share/info
-rename-icon: dsview
-rename-desktop-file: dsview.desktop
 modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=${FLATPAK_DEST}
+      - ./b2 install
+    sources:
+      - type: archive
+        url: https://archives.boost.io/release/1.91.0/source/boost_1_91_0.tar.gz
+        sha256: 5734305f40a76c30f951c9abd409a45a2a19fb546efe4162119250bbe4d3a463
+
+  - name: fake_udev_dir     # workaround the udev rule installation procedure in CMakeLists.txt
+    buildsystem: simple
+    build-commands:
+      - mkdir -p ${FLATPAK_DEST}/lib/udev/rules.d
+
   - name: dsview
     buildsystem: cmake-ninja
     config-opts:
-      - '-DCMAKE_BUILD_TYPE=RelWithDebInfo'
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+    post-install:
+      - install -Dm644 com.dreamsourcelab.DSView.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
     sources:
       - type: git
         url: https://github.com/DreamSourceLab/DSView.git
@@ -30,25 +44,8 @@ modules:
         commit: 03131dd261f08f84262c0172fd051b16cc3bb586
       - type: patch
         path: patches/fix_cmake_install_prefix.patch
-      - type: file
-        path: com.dreamsourcelab.DSView.metainfo.xml
       # It is already fixed in master but current latest release (v1.3.2) is not.
       - type: patch
         path: patches/fix_newer_gcc_include.patch
-    build-commands:
-      - install -Dm644 com.dreamsourcelab.DSView.metainfo.xml -t "${FLATPAK_DEST}/share/metainfo"
-    modules:
-      - shared-modules/libusb/libusb.json
-      - name: boost
-        sources:
-          - type: archive
-            url: https://archives.boost.io/release/1.83.0/source/boost_1_83_0.tar.gz
-            sha256: c0685b68dd44cc46574cce86c4e17c0f611b15e195be9848dfd0769a0a207628
-        buildsystem: simple
-        build-commands:
-          - ./bootstrap.sh --prefix=${FLATPAK_DEST}
-          - ./b2 install
-      - name: fake_udev_dir     # workaround the udev rule installation procedure in CMakeLists.txt
-        buildsystem: simple
-        build-commands:
-          - mkdir -p ${FLATPAK_DEST}/lib/udev/rules.d
+      - type: file
+        path: com.dreamsourcelab.DSView.metainfo.xml
