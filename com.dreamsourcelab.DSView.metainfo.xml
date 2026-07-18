@@ -15,9 +15,6 @@
 
   <description>
     <p>
-      NOTE: This wrapper is not verified by, affiliated with, or supported by DreamSourceLab.
-    </p>
-    <p>
       DSView is a GUI program for supporting various instruments from DreamSourceLab, including logic analyzers, oscilloscopes, etc. DSView is based on the sigrok project.
     </p>
     <p>
